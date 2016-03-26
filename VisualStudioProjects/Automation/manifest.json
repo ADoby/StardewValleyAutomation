@@ -1,0 +1,13 @@
+{
+  "Name": "Automation",
+  "Authour": "tZed",
+  "Version": {
+    "MajorVersion": 0,
+    "MinorVersion": 0,
+    "PatchVersion": 0,
+    "Build": ""
+  },
+  "Description": "Goes in %appdata% StardewValley/Mods/Automation with your dll.",
+
+  "EntryDLL": "Automation.dll"
+}
