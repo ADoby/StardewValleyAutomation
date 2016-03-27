@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.IO;
 
 namespace Automation
@@ -10,8 +11,26 @@ namespace Automation
 
 		#region Data
 
-		public string Name = "";
-		public Base.EnergyConfig EnergyConfig = new Base.EnergyConfig();
+		[DefaultValue("Automation")]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public string Name = "Automation";
+
+		public static string GetName()
+		{
+			return Instance.Name;
+		}
+
+		/// <summary>
+		/// Custom classes get initialized in ConfigData.Fix method
+		/// </summary>
+		[DefaultValue(null)]
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+		public EnergyConfig EnergyConfig = null;
+
+		public static EnergyConfig GetEnergyConfig()
+		{
+			return Instance.EnergyConfig;
+		}
 
 		#endregion Data
 
@@ -49,19 +68,30 @@ namespace Automation
 		private void Fix(string path)
 		{
 			if (EnergyConfig == null)
-				EnergyConfig = new Base.EnergyConfig();
+				EnergyConfig = new EnergyConfig();
+			if (EnergyConfig.EnergyObjects == null)
+				EnergyConfig.EnergyObjects = new EnergyConfig.EnergyObjectConfigs();
 
 			Save(path);
 		}
 
-		private static void Load(string path)
+		/// <summary>
+		/// Load config from Path into Instance
+		/// </summary>
+		/// <param name="path"></param>
+		public static void Load(string path)
 		{
 			Instance = JsonConvert.DeserializeObject<ConfigData>(File.ReadAllText(path));
 			if (Instance == null)
 				Instance = new ConfigData();
 		}
 
-		private void Save(string path)
+		/// <summary>
+		/// Save given Data into given path
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="data"></param>
+		public void Save(string path)
 		{
 			File.WriteAllText(path, JsonConvert.SerializeObject(this));
 		}

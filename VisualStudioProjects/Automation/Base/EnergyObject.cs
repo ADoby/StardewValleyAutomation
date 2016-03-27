@@ -5,6 +5,22 @@ namespace Automation.Base
 {
 	public class EnergyObject
 	{
+		public static string DefaultName
+		{
+			get
+			{
+				return "Base.EnergyObject";
+			}
+		}
+
+		public virtual string Name
+		{
+			get
+			{
+				return "Base.EnergyObject";
+			}
+		}
+
 		protected float StoredEnergy = 0f;
 
 		public float CurrentStoredEnergy
@@ -23,7 +39,7 @@ namespace Automation.Base
 		{
 			get
 			{
-				return EnergyConfig.MaxStoredEnergy_BasicObject;
+				return EnergyConfig.GetMaxStoredEnergy_BasicObject();
 			}
 		}
 
@@ -63,7 +79,7 @@ namespace Automation.Base
 		/// <param name="amount"></param>
 		public void TryExchangeEnergy(EnergyObject other, float amount)
 		{
-			amount = Math.Min(amount, EnergyConfig.MaxEnergyDistributionPerTick);
+			amount = Math.Min(amount, EnergyConfig.GetMaxEnergyDistributionPerTick());
 			if (StoredEnergy > amount)
 				StoredEnergy -= other.TryAddEnergy(amount);
 		}

@@ -53,15 +53,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Stardew Valley">
-      <HintPath>C:\Program Files (x86)\Steam\SteamApps\common\Stardew Valley\Stardew Valley.exe</HintPath>
+      <HintPath>D:\SteamLibrary\SteamApps\common\Stardew Valley\Stardew Valley.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="StardewModdingAPI">
-      <HintPath>..\..\..\..\StardewValley\SMAPI\StardewModdingAPI.exe</HintPath>
+      <HintPath>D:\SteamLibrary\SteamApps\common\Stardew Valley\StardewModdingAPI.exe</HintPath>
     </Reference>
     <Reference Include="StormLoader, Version=0.1.1.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Storm\Storm\Storm\bin\Release\StormLoader.exe</HintPath>
+      <HintPath>D:\SteamLibrary\SteamApps\common\Stardew Valley\StormLoader.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,10 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\EnergyConfig.cs" />
+    <Compile Include="Config\EnergyConfig.cs" />
     <Compile Include="Base\EnergyManager.cs" />
     <Compile Include="Base\EnergyObject.cs" />
     <Compile Include="Config\ConfigData.cs" />
+    <Compile Include="Objects\BatteryBox.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
