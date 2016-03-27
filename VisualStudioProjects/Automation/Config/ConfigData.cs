@@ -11,7 +11,6 @@ namespace Automation
 
 		#region Data
 
-		[DefaultValue("Automation")]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public string Name = "Automation";
 
@@ -23,7 +22,6 @@ namespace Automation
 		/// <summary>
 		/// Custom classes get initialized in ConfigData.Fix method
 		/// </summary>
-		[DefaultValue(null)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public EnergyConfig EnergyConfig = null;
 

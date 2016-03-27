@@ -1,35 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Automation.Base
 {
 	public class EnergyObject
 	{
-		public static string DefaultName
-		{
-			get
-			{
-				return "Base.EnergyObject";
-			}
-		}
+		public const string DefaultName = "Base.EnergyObject";
 
-		public virtual string Name
-		{
-			get
-			{
-				return "Base.EnergyObject";
-			}
-		}
+		public string Name = DefaultName;
 
-		protected float StoredEnergy = 0f;
-
-		public float CurrentStoredEnergy
-		{
-			get
-			{
-				return StoredEnergy;
-			}
-		}
+		public float StoredEnergy { get; protected set; } = 0;
 
 		/// <summary>
 		/// Overwrite this if you want to change the maximum stored energy

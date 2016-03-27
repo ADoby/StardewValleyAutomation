@@ -11,27 +11,13 @@ namespace Automation.Objects
 	/// </summary>
 	public class BatteryBox : Base.EnergyObject
 	{
-		new public static string DefaultName
-		{
-			get
-			{
-				return "BatteryBox";
-			}
-		}
-
-		public override string Name
-		{
-			get
-			{
-				return "BatteryBox";
-			}
-		}
+		new public const string DefaultName = "BatteryBox";
 
 		protected override float MaxStoredEnergy
 		{
 			get
 			{
-				return base.MaxStoredEnergy;
+				return EnergyConfig.GetMaxStoredEnergy_BatteryBox();
 			}
 		}
 	}

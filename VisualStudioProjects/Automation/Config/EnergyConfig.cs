@@ -14,20 +14,16 @@ namespace Automation
 		[System.Serializable]
 		public class EnergyObjectConfigs
 		{
-			[DefaultValue(1000f)]
 			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float BaseObject_MaxStoredEnergy = 0f;
+			public float BaseObject_MaxStoredEnergy = 1000f;
 
-			[DefaultValue(1000f)]
 			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float BatteryBox_MaxStoredEnergy = 0f;
+			public float BatteryBox_MaxStoredEnergy = 1000f;
 		}
 
-		[DefaultValue(256)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public float MaxEnergyDistributionPerTick = 0f;
+		public float MaxEnergyDistributionPerTick = 256f;
 
-		[DefaultValue(null)]
 		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
 		public EnergyObjectConfigs EnergyObjects = null;
 
