@@ -76,11 +76,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\EnergyEvents.cs" />
+    <Compile Include="Base\EnergyGenerator.cs" />
     <Compile Include="Config\EnergyConfig.cs" />
     <Compile Include="Base\EnergyManager.cs" />
     <Compile Include="Base\EnergyObject.cs" />
     <Compile Include="Config\ConfigData.cs" />
     <Compile Include="Objects\BatteryBox.cs" />
+    <Compile Include="Objects\SolarGenerator.cs" />
+    <Compile Include="Objects\CoalGenerator.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

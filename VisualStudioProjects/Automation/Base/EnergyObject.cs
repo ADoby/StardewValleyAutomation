@@ -6,9 +6,13 @@ namespace Automation.Base
 {
 	public class EnergyObject
 	{
-		public const string DefaultName = "Base.EnergyObject";
-
-		public string Name = DefaultName;
+		public virtual string Name
+		{
+			get
+			{
+				return "EnergyObject";
+			}
+		}
 
 		public float StoredEnergy { get; protected set; } = 0;
 
@@ -34,22 +38,29 @@ namespace Automation.Base
 		/// </summary>
 		/// <param name="other">The other.</param>
 		public void AddConnectedObject(EnergyObject other)
-
 		{
 			ConnectedObjects.Add(other);
 		}
 
-		public virtual void UpdateTick()
+		public virtual void Init()
 		{
-			UpdateEnergyDistribution();
 		}
 
-		protected virtual void UpdateEnergyDistribution()
+		public virtual void UpdateTick(float delta)
+		{
+			UpdateEnergyDistribution(delta);
+		}
+
+		public virtual void OnDestroy()
+		{
+		}
+
+		protected virtual void UpdateEnergyDistribution(float delta)
 		{
 			for (int i = 0; i < ConnectedObjects.Count; i++)
 			{
 				if (ConnectedObjects[i] != null)
-					TryExchangeEnergy(ConnectedObjects[i], StoredEnergy / ConnectedObjects.Count);
+					TryExchangeEnergy(ConnectedObjects[i], (StoredEnergy / ConnectedObjects.Count) * delta);
 			}
 		}
 

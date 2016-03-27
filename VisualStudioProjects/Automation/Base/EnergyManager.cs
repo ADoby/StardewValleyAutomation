@@ -13,17 +13,17 @@ namespace Automation.Base
 			ManagedObjects.Add(newObject);
 		}
 
-		public void UpdateTick()
+		public void UpdateTick(float delta)
 		{
-			UpdateManagedObjects();
+			UpdateManagedObjects(delta);
 		}
 
-		private void UpdateManagedObjects()
+		private void UpdateManagedObjects(float delta)
 		{
 			for (int i = 0; i < ManagedObjects.Count; i++)
 			{
 				if (ManagedObjects[i] != null)
-					ManagedObjects[i].UpdateTick();
+					ManagedObjects[i].UpdateTick(delta);
 			}
 		}
 	}
