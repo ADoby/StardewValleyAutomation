@@ -41,11 +41,11 @@ namespace Automation
 		}
 
 		[DefaultValue(256)]
-		public float MaxEnergyDistributionPerTick;
+		public float MaxEnergyDistributionPerSecond;
 
-		public static float GetMaxEnergyDistributionPerTick()
+		public static float GetMaxEnergyDistributionPerSecond()
 		{
-			return ConfigData.Instance.EnergyConfig.MaxEnergyDistributionPerTick;
+			return ConfigData.Instance.EnergyConfig.MaxEnergyDistributionPerSecond;
 		}
 
 		[DefaultValue(null)]

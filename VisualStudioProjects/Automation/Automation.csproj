@@ -78,8 +78,10 @@
   <ItemGroup>
     <Compile Include="Base\EnergyEvents.cs" />
     <Compile Include="Base\EnergyGenerator.cs" />
+    <Compile Include="Base\EnergyCable.cs" />
+    <Compile Include="Base\EnergyNetwork.cs" />
     <Compile Include="Config\EnergyConfig.cs" />
-    <Compile Include="Base\EnergyManager.cs" />
+    <Compile Include="EnergyManager.cs" />
     <Compile Include="Base\EnergyObject.cs" />
     <Compile Include="Config\ConfigData.cs" />
     <Compile Include="Objects\BatteryBox.cs" />

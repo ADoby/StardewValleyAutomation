@@ -16,7 +16,7 @@ namespace Automation.Base
 
 		/// <summary>
 		/// Overwrite this if you want to change the generated energy per second
-		/// Default: EnergyConfig.GeneratedEnergyPerSecond_BasicObject
+		/// Default: EnergyConfig.GeneratedEnergyPerSecond_BasicObject * GeneratedEnergyMultiplier
 		/// </summary>
 		protected virtual float GeneratedEnergyPerSecond
 		{
@@ -26,17 +26,18 @@ namespace Automation.Base
 			}
 		}
 
-		protected float GeneratedEnergyMultiplier = 0f;
+		protected float GeneratedEnergyMultiplier = 1f;
 
 		public override void UpdateTick(float delta)
 		{
 			UpdateEnergyGeneration(delta);
 			base.UpdateTick(delta);
+			UpdateEnergyDistribution(delta);
 		}
 
 		protected virtual void UpdateEnergyGeneration(float delta)
 		{
-			TryAddEnergy(GeneratedEnergyPerSecond * delta);
+			TryAddEnergy(delta, GeneratedEnergyPerSecond * delta, this);
 		}
 	}
 }

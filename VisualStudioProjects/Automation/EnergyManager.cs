@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Automation.Base
+namespace Automation
 {
 	public class EnergyManager
 	{

@@ -14,6 +14,8 @@ namespace Automation.Base
 			}
 		}
 
+		public EnergyNetwork ConnectedNetwork;
+
 		public float StoredEnergy { get; protected set; } = 0;
 
 		/// <summary>
@@ -31,7 +33,7 @@ namespace Automation.Base
 		/// <summary>
 		/// The connected objects
 		/// </summary>
-		protected List<EnergyObject> ConnectedObjects = new List<EnergyObject>();
+		public List<EnergyObject> ConnectedObjects = new List<EnergyObject>();
 
 		/// <summary>
 		/// Adds a connected object.
@@ -48,19 +50,30 @@ namespace Automation.Base
 
 		public virtual void UpdateTick(float delta)
 		{
-			UpdateEnergyDistribution(delta);
 		}
 
+		/// <summary>
+		/// You might want to remove listeners here
+		/// </summary>
 		public virtual void OnDestroy()
 		{
 		}
 
-		protected virtual void UpdateEnergyDistribution(float delta)
+		protected virtual void UpdateEnergyDistribution(float delta, EnergyObject exclude = null)
 		{
+			float amount = 0;
 			for (int i = 0; i < ConnectedObjects.Count; i++)
 			{
-				if (ConnectedObjects[i] != null)
-					TryExchangeEnergy(ConnectedObjects[i], (StoredEnergy / ConnectedObjects.Count) * delta);
+				if (ConnectedObjects[i] == null)
+				{
+					ConnectedObjects.RemoveAt(i);
+					i--;
+					continue;
+				}
+				if (ConnectedObjects[i] == exclude)
+					continue;
+				amount = (StoredEnergy / ConnectedObjects.Count);
+				TryExchangeEnergy(delta, ConnectedObjects[i], amount * delta);
 			}
 		}
 
@@ -69,9 +82,9 @@ namespace Automation.Base
 		/// </summary>
 		/// <param name="other"></param>
 		/// <param name="amount"></param>
-		public void TryExchangeEnergy(EnergyObject other, float amount)
+		public void TryExchangeEnergy(float delta, EnergyObject other, float amount)
 		{
-			amount = Math.Min(amount, EnergyConfig.GetMaxEnergyDistributionPerTick());
+			amount = Math.Min(amount, EnergyConfig.GetMaxEnergyDistributionPerSecond());
 			if (StoredEnergy > amount)
 				StoredEnergy -= other.TryAddEnergy(amount);
 		}
@@ -81,7 +94,7 @@ namespace Automation.Base
 		/// </summary>
 		/// <param name="amount"></param>
 		/// <returns></returns>
-		public float TryAddEnergy(float amount)
+		public virtual float TryAddEnergy(float amount)
 		{
 			if (amount < 0)
 				return 0f;
@@ -90,23 +103,6 @@ namespace Automation.Base
 			StoredEnergy = Math.Min(StoredEnergy + amount, MaxStoredEnergy);
 
 			return StoredEnergy - tmpEnergy;
-		}
-
-		/// <summary>
-		/// Tries to remove amount from this storage, returns the amount that was actually removed
-		/// </summary>
-		/// <param name="wantedAmount"></param>
-		/// <returns></returns>
-		[Obsolete("Better not use this, shouldn't be needed anyway")]
-		public float TryTakeEnergy(float wantedAmount)
-		{
-			if (wantedAmount > 0)
-				return 0f;
-
-			var tmpEnergy = StoredEnergy;
-			StoredEnergy = Math.Max(StoredEnergy - wantedAmount, 0);
-
-			return tmpEnergy - StoredEnergy;
 		}
 	}
 }
