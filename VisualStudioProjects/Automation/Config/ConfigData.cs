@@ -11,8 +11,8 @@ namespace Automation
 
 		#region Data
 
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public string Name = "Automation";
+		[DefaultValue("Automation")]
+		public string Name;
 
 		public static string GetName()
 		{
@@ -22,8 +22,8 @@ namespace Automation
 		/// <summary>
 		/// Custom classes get initialized in ConfigData.Fix method
 		/// </summary>
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public EnergyConfig EnergyConfig = null;
+		[DefaultValue(null)]
+		public EnergyConfig EnergyConfig;
 
 		public static EnergyConfig GetEnergyConfig()
 		{
@@ -79,7 +79,22 @@ namespace Automation
 		/// <param name="path"></param>
 		public static void Load(string path)
 		{
-			Instance = JsonConvert.DeserializeObject<ConfigData>(File.ReadAllText(path));
+			try
+			{
+				var serializer = GetSerializer();
+				using (StreamReader sr = new StreamReader(path))
+				{
+					using (JsonReader writer = new JsonTextReader(sr))
+					{
+						Instance = serializer.Deserialize<ConfigData>(writer);
+					}
+				}
+			}
+			catch (System.Exception)
+			{
+			}
+
+			//Instance = JsonConvert.DeserializeObject<ConfigData>(File.ReadAllText(path));
 			if (Instance == null)
 				Instance = new ConfigData();
 		}
@@ -91,7 +106,30 @@ namespace Automation
 		/// <param name="data"></param>
 		public void Save(string path)
 		{
-			File.WriteAllText(path, JsonConvert.SerializeObject(this));
+			try
+			{
+				var serializer = GetSerializer();
+				using (StreamWriter sw = new StreamWriter(path))
+				{
+					using (JsonWriter writer = new JsonTextWriter(sw))
+					{
+						serializer.Serialize(writer, this);
+					}
+				}
+			}
+			catch (System.Exception)
+			{
+			}
+			//File.WriteAllText(path, JsonConvert.SerializeObject(this));
+		}
+
+		private static JsonSerializer GetSerializer()
+		{
+			var serializer = new JsonSerializer();
+			serializer.Formatting = Formatting.Indented;
+			serializer.DefaultValueHandling = DefaultValueHandling.Populate;
+			serializer.NullValueHandling = NullValueHandling.Include;
+			return serializer;
 		}
 	}
 }

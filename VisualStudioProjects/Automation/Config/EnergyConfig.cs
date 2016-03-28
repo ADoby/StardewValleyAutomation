@@ -15,41 +15,41 @@ namespace Automation
 		public class EnergyObjectConfigs
 		{
 			//Base
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float BaseObject_MaxStoredEnergy = 1000f;
+			[DefaultValue(1000f)]
+			public float BaseObject_MaxStoredEnergy;
 
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float BasicObject_GeneratedEnergyPerSecond = 16f;
+			[DefaultValue(16f)]
+			public float BasicObject_GeneratedEnergyPerSecond;
 
 			//Battery Box
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float BatteryBox_MaxStoredEnergy = 1000f;
+			[DefaultValue(1000f)]
+			public float BatteryBox_MaxStoredEnergy;
 
 			//Coal Generator
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float CoalGenerator_MaxStoredEnergy = 1000f;
+			[DefaultValue(1000f)]
+			public float CoalGenerator_MaxStoredEnergy;
 
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float CoalGenerator_GeneratedEnergyPerSecond = 16f;
+			[DefaultValue(16f)]
+			public float CoalGenerator_GeneratedEnergyPerSecond;
 
 			//Solar Generator
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float SolarGenerator_MaxStoredEnergy = 1000f;
+			[DefaultValue(1000f)]
+			public float SolarGenerator_MaxStoredEnergy;
 
-			[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-			public float SolarGenerator_GeneratedEnergyPerSecond = 16f;
+			[DefaultValue(16f)]
+			public float SolarGenerator_GeneratedEnergyPerSecond;
 		}
 
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public float MaxEnergyDistributionPerTick = 256f;
+		[DefaultValue(256)]
+		public float MaxEnergyDistributionPerTick;
 
 		public static float GetMaxEnergyDistributionPerTick()
 		{
 			return ConfigData.Instance.EnergyConfig.MaxEnergyDistributionPerTick;
 		}
 
-		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-		public EnergyObjectConfigs EnergyObjects = null;
+		[DefaultValue(null)]
+		public EnergyObjectConfigs EnergyObjects;
 
 		public static EnergyObjectConfigs GetEnergyObjects()
 		{
